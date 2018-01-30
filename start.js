@@ -11,11 +11,11 @@ mongoose.connection.on('error', (err) => {
 });
 
 // Import all models
-// require('./models/whatever');
+require('./models/article');
 
 
 // Start our API server
-const app = require('./app');
+const app = require('./server');
 app.set('port', process.env.PORT || 3001);
 const server = app.listen(app.get('port'), () => {
   console.log(`API Server now running → PORT ${server.address().port}, oh yeah!`);
