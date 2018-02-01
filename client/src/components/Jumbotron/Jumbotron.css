@@ -2,6 +2,7 @@
   background-image: url('../../images/nytScrubber-jumboBG.jpg');
   background-size: cover;
   min-height: 30vh;
+  border: 1px solid #5a0f13;
 }
 
 .overlay-root {

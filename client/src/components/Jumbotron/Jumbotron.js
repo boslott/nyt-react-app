@@ -2,7 +2,7 @@ import React from 'react';
 import './Jumbotron.css';
 
 export const Jumbotron = () => (
-  <div className='overlay-root mt-5'>
+  <div className='overlay-root mt-4'>
     <div className='jumbotron overlay'>
       <div className='jumbotron__text'>
         <h1 className='text-white text-center font-weight-bold'>NYT News Scrubber</h1>

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Navbar } from './components/Navbar/Navbar';
+import './App.css';
+import { Nav } from './components/Nav/Nav';
+// import { Navbar } from './components/Navbar/Navbar';
 import { Homepage } from './pages/Homepage';
 import { SavedArticles } from './pages/SavedArticles';
 // import NoMatch from "./pages/NoMatch";
@@ -10,7 +12,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navbar />
+          {/* <Navbar /> */}
+          <Nav />
           <Switch>
             <Route exact path='/' component={Homepage} />
             <Route exact path='/saved-articles' component={SavedArticles} />
