@@ -3,22 +3,23 @@ import './SearchForm.css';
 import Grid from 'material-ui/Grid';
 import Card from 'material-ui/Card';
 import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
+// import { FormControl } from 'material-ui/Form';
 import Button from 'material-ui/Button';
 import API from '../../utils/API';
+import moment from 'moment';
 
 class SearchForm extends Component {
 
   state = {
     topic: '',
-    startYear: '',
-    endYear: ''
+    startDate: '',
+    endDate: ''
   };
 
   
 
-  getArticles = (topic, startYear, endYear) => {
-    API.getArticles(topic, startYear, endYear)
+  getArticles = (topic, startDate, endDate) => {
+    API.getArticles(topic, startDate, endDate)
       .then(result => {
         this.props.callback(result.data.response.docs);
       })
@@ -39,13 +40,12 @@ class SearchForm extends Component {
   // When the form is submitted, prevent the default event and alert the username and password
   handleFormSubmit = event => { 
     event.preventDefault();
-    this.getArticles(this.state.topic, this.state.startYear, this.state.endYear);
-    this.setState({ topic: '', startYear: '', endYear: '' });
+    let formatedStartDate = moment(this.state.startDate).format('YYYYMMDD');
+    let formatedEndDate = moment(this.state.endDate).format('YYYYMMDD');
+    this.getArticles(this.state.topic, formatedStartDate, formatedEndDate);
+    this.setState({ topic: '', startDate: '', endDate: '' });
   }
 
-  // saveBtn = () => {
-  //   API.saveArticle()
-  // }
 
   render() {
     return (
@@ -62,41 +62,42 @@ class SearchForm extends Component {
                 </Grid>
                 <Grid container className='d-flex justify-content-center'>
                   <Grid item xs={10} className='ml-5'>
-                    <FormControl>
+                    {/* <FormControl> */}
                       <InputLabel>Topic</InputLabel>
                       <Input
+                        fullWidth={true}
                         type='text'
                         name='topic'
                         value={this.state.topic}
                         onChange={this.handleInputChange}
                       />
-                    </FormControl>
+                    {/* </FormControl> */}
                   </Grid>
                 </Grid>
-                <Grid container className='d-flex justify-content-center'>
-                  <Grid item xs={10} className='ml-5'>
-                    <FormControl>
-                      <InputLabel>Start Year</InputLabel>
+                <Grid container className='d-flex justify-content-center mt-4 pl-4'>
+                  <Grid item xs={5} className='ml-5'>
+                    {/* <FormControl> */}
+                      <InputLabel className='mr-5'>Start Date</InputLabel>
                       <Input
-                        type='text'
-                        name='startYear'
-                        value={this.state.startYear}
+                        type='date'
+                        name='startDate'
+                        value={this.state.startDate}
                         onChange={this.handleInputChange}
                       />
-                    </FormControl>
+                    {/* </FormControl> */}
                   </Grid>
-                </Grid>
-                <Grid container className='d-flex justify-content-center'>
-                  <Grid item xs={10} className='ml-5'>
-                    <FormControl>
-                      <InputLabel>End Year</InputLabel>
+                {/* </Grid> */}
+                {/* <Grid container className='d-flex justify-content-center'> */}
+                  <Grid item xs={5} className='ml-5'>
+                    {/* <FormControl> */}
+                      <InputLabel className='mr-5'>End Date</InputLabel>
                       <Input
-                        type='text'
-                        name='endYear'
-                        value={this.state.endYear}
+                        type='date'
+                        name='endDate'
+                        value={this.state.endDate}
                         onChange={this.handleInputChange}
                       />
-                    </FormControl>
+                    {/* </FormControl> */}
                   </Grid>
                 </Grid> 
                 <Grid container className='d-flex justify-content-center'>
