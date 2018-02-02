@@ -5,14 +5,25 @@ import Card from 'material-ui/Card';
 import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 import Button from 'material-ui/Button';
+import API from '../../utils/API';
 
 class SearchForm extends Component {
+
   state = {
     topic: '',
     startYear: '',
-    endYear: '',
-    justify: 'center'
+    endYear: ''
   };
+
+  
+
+  getArticles = (topic, startYear, endYear) => {
+    API.getArticles(topic, startYear, endYear)
+      .then(result => {
+        this.props.callback(result.data.response.docs);
+      })
+      .catch(err => console.log(err));
+   }
 
   // handle any changes to the input fields
   handleInputChange = event => {
@@ -23,24 +34,33 @@ class SearchForm extends Component {
     this.setState({
       [name]: value
     });
-  };
+  }
 
   // When the form is submitted, prevent the default event and alert the username and password
   handleFormSubmit = event => { 
     event.preventDefault();
-    console.log(this.state);
-    // alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
+    this.getArticles(this.state.topic, this.state.startYear, this.state.endYear);
     this.setState({ topic: '', startYear: '', endYear: '' });
-  };
+  }
+
+  // saveBtn = () => {
+  //   API.saveArticle()
+  // }
 
   render() {
     return (
-      <Grid container justify={this.state.justify}>
-        <Grid item xs={10}>
+      <Grid container className='d-flex justify-content-center mb-5'>
+        <Grid item xs={11}>
           <Card>
             <form>
               <Grid container spacing={24}>
-                <Grid container justify={this.state.justify}>
+                <Grid container className='d-flex justify-content-center'>
+                  <Grid item xs={10} className='ml-5'>
+                    <h2 className='text-center'>Search</h2>
+                    <hr />
+                  </Grid>
+                </Grid>
+                <Grid container className='d-flex justify-content-center'>
                   <Grid item xs={10} className='ml-5'>
                     <FormControl>
                       <InputLabel>Topic</InputLabel>
@@ -53,7 +73,7 @@ class SearchForm extends Component {
                     </FormControl>
                   </Grid>
                 </Grid>
-                <Grid container justify={this.state.justify}>
+                <Grid container className='d-flex justify-content-center'>
                   <Grid item xs={10} className='ml-5'>
                     <FormControl>
                       <InputLabel>Start Year</InputLabel>
@@ -66,7 +86,7 @@ class SearchForm extends Component {
                     </FormControl>
                   </Grid>
                 </Grid>
-                <Grid container justify={this.state.justify}>
+                <Grid container className='d-flex justify-content-center'>
                   <Grid item xs={10} className='ml-5'>
                     <FormControl>
                       <InputLabel>End Year</InputLabel>
@@ -79,7 +99,7 @@ class SearchForm extends Component {
                     </FormControl>
                   </Grid>
                 </Grid> 
-                <Grid container justify={this.state.justify}>
+                <Grid container className='d-flex justify-content-center'>
                   <Grid item xs={10}>
                     <Button raised size='large' className='submit btn-block my-4' onClick={this.handleFormSubmit}>
                       Submit &nbsp;

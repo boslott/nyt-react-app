@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 import { Nav } from './components/Nav/Nav';
 // import { Navbar } from './components/Navbar/Navbar';
-import { Homepage } from './pages/Homepage';
-import { SavedArticles } from './pages/SavedArticles';
+import Homepage from './pages/Homepage';
+import SavedArticles from './pages/SavedArticles';
 // import NoMatch from "./pages/NoMatch";
 
 class App extends Component {
