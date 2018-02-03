@@ -17,6 +17,6 @@ require('./models/article');
 // Start our API server
 const app = require('./server');
 app.set('port', process.env.PORT || 3001);
-const server = app.listen(app.get('port'), () => {
+const server = app.listen(app.get('port'), '0.0.0.0', () => {
   console.log(`API Server now running → PORT ${server.address().port}, oh yeah!`);
 });
