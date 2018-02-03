@@ -11,7 +11,7 @@ mongoose.connection.on('error', (err) => {
 });
 
 // Import all models
-require('./models/article');
+require('./models/Article');
 
 
 // Start our API server
